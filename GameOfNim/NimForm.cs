@@ -17,7 +17,7 @@ namespace GameOfNim
 
         private const int maxRows = 4;
         private const int maxCols = 7;
-
+        
         private GameBoard gameBoard = new GameBoard(maxRows);
 
         int marblesSelectedCount = 0;  // Total number of marbles selected in current turn
@@ -104,9 +104,8 @@ namespace GameOfNim
             pnlGameBoard.Visible = true;
 
             txtCurrentTurn.Text = playerOne.getPlayerName();
-
+            gameCount++;
             createBoard();
-
         }
 
         private void btnEndTurn_Click(object sender, EventArgs e)
@@ -120,7 +119,7 @@ namespace GameOfNim
                 gameBoard.takeMarbles(rowID, marblesSelectedCount);
             }
             
-
+            // Reset row button style and enabled attribute for buttons.
             for (int row = 0; row < maxRows; row++)
             {
                 newRowButton[row].BackColor = Button.DefaultBackColor;
@@ -138,6 +137,7 @@ namespace GameOfNim
                 }
             }
 
+            // Check Game Status
             int gameStatus = gameBoard.checkTotal();
 
             if(gameStatus == 0)
@@ -152,10 +152,8 @@ namespace GameOfNim
                     MessageBox.Show(playerOne.getPlayerName() + " Wins!", "Game Over");
                     playerOne.incrementNumWins();
                 }
-                for (int row = 0; row < maxRows; row++)
-                {
-                    newRowButton[row].Enabled = false;
-                }
+                pnlGameBoard.Enabled = false;
+                btnPlayAgain.Visible = true;
                 btnPlayAgain.Enabled = true;
             }
             else if(gameStatus == 1)
@@ -171,10 +169,8 @@ namespace GameOfNim
                     MessageBox.Show(playerTwo.getPlayerName() + " Wins!", "Game Over");
                     playerTwo.incrementNumWins();
                 }
-                for (int row = 0; row < maxRows; row++)
-                {
-                    newRowButton[row].Enabled = false;
-                }
+                pnlGameBoard.Enabled = false;
+                btnPlayAgain.Visible = true;
                 btnPlayAgain.Enabled = true;
             }
             else
@@ -297,20 +293,22 @@ namespace GameOfNim
             btnEndTurn.Enabled = true;
         }
 
+        private void btnPlayAgain_Click(object sender, EventArgs e)
+        {
+            gameBoard.resetGame();
+            for (int i = 0; i < newRowButton.Length; i++)
+            {
+                pnlGameBoard.Controls.Remove(newRowButton[i]);
+            }
+            pnlGameBoard.Enabled = true;
+            gameCount++;
+            createBoard();
+            txtCurrentTurn.Text = playerOne.getPlayerName();
+        }
+
         private void btnQuit_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void btnPlayAgain_Click(object sender, EventArgs e)
-        {
-            createBoard();
-            gameBoard.resetGame();
-            txtCurrentTurn.Text = playerOne.getPlayerName();
-            for (int row = 0; row < maxRows; row++)
-            {
-                newRowButton[row].Enabled = true;
-            }
         }
 
         private void Button_Click(object sender, EventArgs e)

@@ -214,10 +214,10 @@
             // btnEndTurn
             // 
             this.btnEndTurn.Enabled = false;
-            this.btnEndTurn.Location = new System.Drawing.Point(832, 400);
+            this.btnEndTurn.Location = new System.Drawing.Point(832, 388);
             this.btnEndTurn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnEndTurn.Name = "btnEndTurn";
-            this.btnEndTurn.Size = new System.Drawing.Size(120, 65);
+            this.btnEndTurn.Size = new System.Drawing.Size(120, 77);
             this.btnEndTurn.TabIndex = 34;
             this.btnEndTurn.Text = "End Turn";
             this.btnEndTurn.UseVisualStyleBackColor = true;
@@ -241,7 +241,7 @@
             this.btnQuit.Location = new System.Drawing.Point(811, 913);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(143, 52);
-            this.btnQuit.TabIndex = 14;
+            this.btnQuit.TabIndex = 35;
             this.btnQuit.Text = "Quit the Game";
             this.btnQuit.UseVisualStyleBackColor = false;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
@@ -249,12 +249,13 @@
             // btnPlayAgain
             // 
             this.btnPlayAgain.Enabled = false;
-            this.btnPlayAgain.Location = new System.Drawing.Point(27, 913);
+            this.btnPlayAgain.Location = new System.Drawing.Point(27, 905);
             this.btnPlayAgain.Name = "btnPlayAgain";
-            this.btnPlayAgain.Size = new System.Drawing.Size(252, 52);
+            this.btnPlayAgain.Size = new System.Drawing.Size(233, 69);
             this.btnPlayAgain.TabIndex = 15;
             this.btnPlayAgain.Text = "Play Again";
             this.btnPlayAgain.UseVisualStyleBackColor = true;
+            this.btnPlayAgain.Visible = false;
             this.btnPlayAgain.Click += new System.EventHandler(this.btnPlayAgain_Click);
             // 
             // GamePanel
