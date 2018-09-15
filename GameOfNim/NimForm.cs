@@ -111,9 +111,6 @@ namespace GameOfNim
 
         private void btnEndTurn_Click(object sender, EventArgs e)
         {
-            // MessageBox.Show("Marbles in row:" + rowID + " = " + gameBoard.checkRowCount(rowID).ToString());
-            MessageBox.Show("Selected Row:" + rowID);
-
             if (marblesSelectedCount == 0)
             {
                 MessageBox.Show("Please take at least one marble.", "Error");
@@ -121,15 +118,6 @@ namespace GameOfNim
             else
             {
                 gameBoard.takeMarbles(rowID, marblesSelectedCount);
-                MessageBox.Show("Marbles in row:" + rowID + " = " + gameBoard.checkRowCount(rowID).ToString());
-                if (txtCurrentTurn.Text.Equals(playerOne.getPlayerName()))
-                {
-                    txtCurrentTurn.Text = playerTwo.getPlayerName();
-                }
-                else
-                {
-                    txtCurrentTurn.Text = playerOne.getPlayerName();
-                }
             }
             
 
@@ -149,8 +137,60 @@ namespace GameOfNim
                     newButton[row,col].Enabled = false;
                 }
             }
+
+            int gameStatus = gameBoard.checkTotal();
+
+            if(gameStatus == 0)
+            {
+                // End Game: player who went loses
+                if (txtCurrentTurn.Text.Equals(playerOne.getPlayerName()))
+                {
+                    MessageBox.Show(playerTwo.getPlayerName() + " Wins!", "Game Over");
+                    playerTwo.incrementNumWins();
+                } else
+                {
+                    MessageBox.Show(playerOne.getPlayerName() + " Wins!", "Game Over");
+                    playerOne.incrementNumWins();
+                }
+                for (int row = 0; row < maxRows; row++)
+                {
+                    newRowButton[row].Enabled = false;
+                }
+                btnPlayAgain.Enabled = true;
+            }
+            else if(gameStatus == 1)
+            {
+                // End Game: current player wins
+                if (txtCurrentTurn.Text.Equals(playerOne.getPlayerName()))
+                {
+                    MessageBox.Show(playerOne.getPlayerName() + " Wins!", "Game Over");
+                    playerOne.incrementNumWins();
+                }
+                else
+                {
+                    MessageBox.Show(playerTwo.getPlayerName() + " Wins!", "Game Over");
+                    playerTwo.incrementNumWins();
+                }
+                for (int row = 0; row < maxRows; row++)
+                {
+                    newRowButton[row].Enabled = false;
+                }
+                btnPlayAgain.Enabled = true;
+            }
+            else
+            {
+                // Continue Game
+                if (txtCurrentTurn.Text.Equals(playerOne.getPlayerName()))
+                {
+                    txtCurrentTurn.Text = playerTwo.getPlayerName();
+                }
+                else
+                {
+                    txtCurrentTurn.Text = playerOne.getPlayerName();
+                }
+            }
+
             marblesSelectedCount = 0;
-            
         } 
 
         private void createBoard()
@@ -262,6 +302,17 @@ namespace GameOfNim
             this.Close();
         }
 
+        private void btnPlayAgain_Click(object sender, EventArgs e)
+        {
+            createBoard();
+            gameBoard.resetGame();
+            txtCurrentTurn.Text = playerOne.getPlayerName();
+            for (int row = 0; row < maxRows; row++)
+            {
+                newRowButton[row].Enabled = true;
+            }
+        }
+
         private void Button_Click(object sender, EventArgs e)
         {
             marblesSelectedCount++;
@@ -312,6 +363,15 @@ namespace GameOfNim
             marblesByRow = new int[] { 1, 3, 5, 7 };
 
         }
+        public void resetGame()
+        {
+            numMarbles = 16;
+            marblesByRow = new int[] { 1, 3, 5, 7 };
+        }
+        public int getMarblesOnBoard()
+        {
+            return numMarbles;
+        }
         // Take a marble from a row
         public void takeMarbles(int rowID, int totalMarblesSelected)
         {
@@ -320,46 +380,26 @@ namespace GameOfNim
             {
                 marblesInRow = marblesByRow[0];
                 marblesByRow[0] = marblesInRow - totalMarblesSelected;
+                numMarbles -= totalMarblesSelected;
             }
             if (rowID == 1)
             {
                 marblesInRow = marblesByRow[1];
                 marblesByRow[1] = marblesInRow - totalMarblesSelected;
+                numMarbles -= totalMarblesSelected;
             }
             if (rowID == 2)
             {
                 marblesInRow = marblesByRow[2];
                 marblesByRow[2] = marblesInRow - totalMarblesSelected;
+                numMarbles -= totalMarblesSelected;
             }
             if (rowID == 3)
             {
                 marblesInRow = marblesByRow[3];
                 marblesByRow[3] = marblesInRow - totalMarblesSelected;
+                numMarbles -= totalMarblesSelected;
             }
-            /*
-            for (int i = 0; i < totalMarblesSelected; i++)
-            {
-                if (intRow == 1)
-                {
-                    marbleCount = marblesByRow[0] - 1;
-                    marblesByRow[0] = marbleCount;
-                }
-                if (intRow == 2)
-                {
-                    marbleCount = marblesByRow[1] - 1;
-                    marblesByRow[1] = marbleCount;
-                }
-                if (intRow == 3)
-                {
-                    marbleCount = marblesByRow[2] - 1;
-                    marblesByRow[2] = marbleCount;
-                }
-                if (intRow == 4)
-                {
-                    marbleCount = marblesByRow[3] - 1;
-                    marblesByRow[3] = marbleCount;
-                }
-            }*/
             totalMarblesSelected = 0;
         }
 

@@ -46,6 +46,7 @@
             this.btnEndTurn = new System.Windows.Forms.Button();
             this.lblInstructions = new System.Windows.Forms.Label();
             this.btnQuit = new System.Windows.Forms.Button();
+            this.btnPlayAgain = new System.Windows.Forms.Button();
             this.pnlGameBoard.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -245,11 +246,23 @@
             this.btnQuit.UseVisualStyleBackColor = false;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
+            // btnPlayAgain
+            // 
+            this.btnPlayAgain.Enabled = false;
+            this.btnPlayAgain.Location = new System.Drawing.Point(27, 913);
+            this.btnPlayAgain.Name = "btnPlayAgain";
+            this.btnPlayAgain.Size = new System.Drawing.Size(252, 52);
+            this.btnPlayAgain.TabIndex = 15;
+            this.btnPlayAgain.Text = "Play Again";
+            this.btnPlayAgain.UseVisualStyleBackColor = true;
+            this.btnPlayAgain.Click += new System.EventHandler(this.btnPlayAgain_Click);
+            // 
             // GamePanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1005, 994);
+            this.Controls.Add(this.btnPlayAgain);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.pnlGameBoard);
             this.Controls.Add(this.btnPlay);
@@ -292,6 +305,7 @@
         private System.Windows.Forms.Label lblInstructions;
         private System.Windows.Forms.Button btnEndTurn;
         private System.Windows.Forms.Button btnQuit;
+        private System.Windows.Forms.Button btnPlayAgain;
     }
 }
 
