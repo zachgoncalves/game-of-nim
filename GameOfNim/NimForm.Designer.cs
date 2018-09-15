@@ -47,6 +47,8 @@
             this.lblInstructions = new System.Windows.Forms.Label();
             this.btnQuit = new System.Windows.Forms.Button();
             this.btnPlayAgain = new System.Windows.Forms.Button();
+            this.txtGamesPlayed = new System.Windows.Forms.TextBox();
+            this.lblGamesPlayed = new System.Windows.Forms.Label();
             this.pnlGameBoard.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -258,11 +260,30 @@
             this.btnPlayAgain.Visible = false;
             this.btnPlayAgain.Click += new System.EventHandler(this.btnPlayAgain_Click);
             // 
+            // txtGamesPlayed
+            // 
+            this.txtGamesPlayed.Location = new System.Drawing.Point(545, 926);
+            this.txtGamesPlayed.Name = "txtGamesPlayed";
+            this.txtGamesPlayed.ReadOnly = true;
+            this.txtGamesPlayed.Size = new System.Drawing.Size(55, 26);
+            this.txtGamesPlayed.TabIndex = 36;
+            // 
+            // lblGamesPlayed
+            // 
+            this.lblGamesPlayed.AutoSize = true;
+            this.lblGamesPlayed.Location = new System.Drawing.Point(423, 929);
+            this.lblGamesPlayed.Name = "lblGamesPlayed";
+            this.lblGamesPlayed.Size = new System.Drawing.Size(116, 20);
+            this.lblGamesPlayed.TabIndex = 37;
+            this.lblGamesPlayed.Text = "Games Played:";
+            // 
             // GamePanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1005, 994);
+            this.Controls.Add(this.lblGamesPlayed);
+            this.Controls.Add(this.txtGamesPlayed);
             this.Controls.Add(this.btnPlayAgain);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.pnlGameBoard);
@@ -307,6 +328,8 @@
         private System.Windows.Forms.Button btnEndTurn;
         private System.Windows.Forms.Button btnQuit;
         private System.Windows.Forms.Button btnPlayAgain;
+        private System.Windows.Forms.TextBox txtGamesPlayed;
+        private System.Windows.Forms.Label lblGamesPlayed;
     }
 }
 

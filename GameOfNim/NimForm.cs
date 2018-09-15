@@ -118,25 +118,27 @@ namespace GameOfNim
             {
                 gameBoard.takeMarbles(rowID, marblesSelectedCount);
             }
-            
+
             // Reset row button style and enabled attribute for buttons.
-            for (int row = 0; row < maxRows; row++)
+            if (marblesSelectedCount != 0)
             {
-                newRowButton[row].BackColor = Button.DefaultBackColor;
-                if (gameBoard.checkRowCount(row) != 0)
+                for (int row = 0; row < maxRows; row++)
                 {
-                    newRowButton[row].Enabled = true;
-                }
-                else if (gameBoard.checkRowCount(row) == 0)
-                {
-                    newRowButton[row].Enabled = false;
-                }
-                for (int col = 0; col < maxCols; col++)
-                {
-                    newButton[row,col].Enabled = false;
+                    newRowButton[row].BackColor = Button.DefaultBackColor;
+                    if (gameBoard.checkRowCount(row) != 0)
+                    {
+                        newRowButton[row].Enabled = true;
+                    }
+                    else if (gameBoard.checkRowCount(row) == 0)
+                    {
+                        newRowButton[row].Enabled = false;
+                    }
+                    for (int col = 0; col < maxCols; col++)
+                    {
+                        newButton[row, col].Enabled = false;
+                    }
                 }
             }
-
             // Check Game Status
             int gameStatus = gameBoard.checkTotal();
 
@@ -145,33 +147,40 @@ namespace GameOfNim
                 // End Game: player who went loses
                 if (txtCurrentTurn.Text.Equals(playerOne.getPlayerName()))
                 {
-                    MessageBox.Show(playerTwo.getPlayerName() + " Wins!", "Game Over");
                     playerTwo.incrementNumWins();
-                } else
+                    MessageBox.Show(playerTwo.getPlayerName() + " Wins!", "Game Over");
+                    MessageBox.Show(playerTwo.getPlayerName() + " has won " + playerTwo.getNumWins() + " games.", "Game Over");
+                }
+                else
                 {
-                    MessageBox.Show(playerOne.getPlayerName() + " Wins!", "Game Over");
                     playerOne.incrementNumWins();
+                    MessageBox.Show(playerOne.getPlayerName() + " Wins!", "Game Over");
+                    MessageBox.Show(playerOne.getPlayerName() + " has won " + playerOne.getNumWins() + " games.", "Game Over");
                 }
                 pnlGameBoard.Enabled = false;
                 btnPlayAgain.Visible = true;
                 btnPlayAgain.Enabled = true;
+                txtGamesPlayed.Text = gameCount.ToString();
             }
             else if(gameStatus == 1)
             {
                 // End Game: current player wins
                 if (txtCurrentTurn.Text.Equals(playerOne.getPlayerName()))
                 {
-                    MessageBox.Show(playerOne.getPlayerName() + " Wins!", "Game Over");
                     playerOne.incrementNumWins();
+                    MessageBox.Show(playerOne.getPlayerName() + " Wins!", "Game Over");
+                    MessageBox.Show(playerOne.getPlayerName() + " has won " + playerOne.getNumWins() + " games.", "Game Over");
                 }
                 else
                 {
-                    MessageBox.Show(playerTwo.getPlayerName() + " Wins!", "Game Over");
                     playerTwo.incrementNumWins();
+                    MessageBox.Show(playerTwo.getPlayerName() + " Wins!", "Game Over");
+                    MessageBox.Show(playerTwo.getPlayerName() + " has won " + playerTwo.getNumWins() + " games.", "Game Over");
                 }
                 pnlGameBoard.Enabled = false;
                 btnPlayAgain.Visible = true;
                 btnPlayAgain.Enabled = true;
+                txtGamesPlayed.Text = gameCount.ToString();
             }
             else
             {
@@ -347,6 +356,10 @@ namespace GameOfNim
         public int incrementNumWins()
         {
             return numWins++;
+        }
+        public int getNumWins()
+        {
+            return numWins;
         }
     }
 
