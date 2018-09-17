@@ -1,4 +1,15 @@
-﻿using System;
+﻿/* Temple University
+ * Component Based Software Design (CIS 3309) 
+ * Project 1: Game of Nim
+ * Written by: Zachary Goncalves with game board generation code provided by Professor Frank Friedman
+ * 
+ * Description:
+ * This project is a simulation of the Game of Nim, in which players must not be the last player to take the last button
+ * This simulation keeps track of two players, the number of games played between these players, and the number of games
+ * each player has won.
+ */ 
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +23,7 @@ namespace GameOfNim
 {
     public partial class GamePanel : Form
     {
-        private Player playerOne, playerTwo, currentPlayer;
+        private Player playerOne, playerTwo;
         private List<Player> playersList = new List<Player>(2);
 
         private const int maxRows = 4;
@@ -23,7 +34,6 @@ namespace GameOfNim
         int marblesSelectedCount = 0;  // Total number of marbles selected in current turn
         int gameCount = 0;             // counts number of games played
         int rowID;                     // row number of row just slected by current player
-        int currentMarbles = 28;
 
         private Button[,] newButton = new Button[maxRows, maxCols];
         private Button[] newRowButton = new Button[maxRows];
@@ -33,7 +43,7 @@ namespace GameOfNim
         {
             InitializeComponent();
         }
-
+        // Takes in player name for first player and enables second player name input
         private void btnFirstPlayerOK_Click(object sender, EventArgs e)
         {
             if (txtFirstPlayerName.Text.Equals(""))
@@ -55,7 +65,7 @@ namespace GameOfNim
 
             }
         }
-
+        // Takes second player name and validates that player names are different. If not, requires new names. Shows play game btn.
         private void btnSecondPlayerOK_Click(object sender, EventArgs e)
         {
             if (txtSecondPlayerName.Text.Equals(""))
@@ -97,7 +107,7 @@ namespace GameOfNim
                 }
             }
         }
-
+        // Displays panel with game board and generates game board
         private void btnPlay_Click(object sender, EventArgs e)
         {
             pnlGameBoard.Enabled = true;
@@ -107,7 +117,7 @@ namespace GameOfNim
             gameCount++;
             createBoard();
         }
-
+        // Handles end of turn logic
         private void btnEndTurn_Click(object sender, EventArgs e)
         {
             if (marblesSelectedCount == 0)
@@ -267,7 +277,6 @@ namespace GameOfNim
         private void RowButton_Click(object sender, EventArgs e)
         {
             rowID = convertCharToInt(((Button)sender).Name[6]);
-            // MessageBox.Show("Row Button [" + (rowID+1) + "] has been selected!");
             ((Button)sender).BackColor = System.Drawing.Color.Orange;
             for (int i = 0; i < maxRows; i++)
             {
@@ -302,24 +311,29 @@ namespace GameOfNim
             btnEndTurn.Enabled = true;
         }
 
+        // Resets the game board
         private void btnPlayAgain_Click(object sender, EventArgs e)
         {
             gameBoard.resetGame();
             for (int i = 0; i < newRowButton.Length; i++)
             {
                 pnlGameBoard.Controls.Remove(newRowButton[i]);
+                for (int col = 0; col < maxCols; col++)
+                {
+                    pnlGameBoard.Controls.Remove(newButton[i, col]);
+                }
             }
             pnlGameBoard.Enabled = true;
             gameCount++;
             createBoard();
             txtCurrentTurn.Text = playerOne.getPlayerName();
         }
-
+        // Closes the form
         private void btnQuit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
+        // Event Handler for all Marble buttons
         private void Button_Click(object sender, EventArgs e)
         {
             marblesSelectedCount++;
@@ -331,7 +345,7 @@ namespace GameOfNim
             return ((int)(c) - (int)('0'));
         }
     }
-
+    // Player Class that stores the number of wins and name of each player
     public class Player
     {
         private string playerName;
@@ -362,7 +376,7 @@ namespace GameOfNim
             return numWins;
         }
     }
-
+    // Internal Board class that processes the state of the game
     public class GameBoard
     {
         private int numMarbles;
