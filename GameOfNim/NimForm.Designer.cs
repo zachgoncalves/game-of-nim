@@ -298,6 +298,7 @@
             this.Controls.Add(this.blWelcomeMessage);
             this.Controls.Add(this.lblGameIntro);
             this.Controls.Add(this.lblWelcomeTItle);
+            this.MaximizeBox = false;
             this.Name = "GamePanel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Game of Nim";
