@@ -267,6 +267,7 @@
             this.txtGamesPlayed.ReadOnly = true;
             this.txtGamesPlayed.Size = new System.Drawing.Size(55, 26);
             this.txtGamesPlayed.TabIndex = 36;
+            this.txtGamesPlayed.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblGamesPlayed
             // 
@@ -298,6 +299,7 @@
             this.Controls.Add(this.blWelcomeMessage);
             this.Controls.Add(this.lblGameIntro);
             this.Controls.Add(this.lblWelcomeTItle);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "GamePanel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

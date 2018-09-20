@@ -253,19 +253,19 @@ namespace GameOfNim
 
             lblCurrentTurn.Visible = true;
             txtCurrentTurn.Visible = true;
-            // Set up the board with the 16 marbles
-            newButton[0, maxCols / 2].Text = "X";
+            // Set up the board with the 16 marbles (I use a match)
+            newButton[0, maxCols / 2].BackgroundImage = Properties.Resources.match2;
             for (int i = maxCols / 2 - 1; i <= maxCols / 2 + 1; i++)
             {
-                newButton[1, i].Text = "X";
+                newButton[1, i].BackgroundImage = Properties.Resources.match2; ;
             }
             for (int i = maxCols / 2 - 2; i <= maxCols / 2 + 2; i++)
             {
-                newButton[2, i].Text = "X";
+                newButton[2, i].BackgroundImage = Properties.Resources.match2;
             }
             for (int i = maxCols / 2 - 3; i <= maxCols / 2 + 3; i++)
             {
-                newButton[3, i].Text = "X";
+                newButton[3, i].BackgroundImage = Properties.Resources.match2;
             }
         } // end createBoard
 
